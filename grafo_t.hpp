@@ -1,8 +1,6 @@
 #pragma once
 
 
-
-
 class grafo_t {
 
   private:
@@ -24,7 +22,8 @@ class grafo_t {
   unsigned int m_; //numero de arcos o aristas
   unsigned int dirigido_;
   LA_nodo LS_; //lista de sucesores
-  vector<LA_nodo> LP_; //lista de predecesores
+  LA_nodo LP_; //lista de predecesores
+
 
 
   public:
@@ -37,13 +36,15 @@ class grafo_t {
   {}
 
   grafo_t(char nombrefichero[], int &errorapertura);
+
   //destructores
 
   ~grafo_t(void) {}
 
-  //setters
-  void set_n() {} 
-  void set_m() {} 
 
   //getters
+
+
+  //lectura fichero
+
 };
