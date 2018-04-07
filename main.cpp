@@ -1,0 +1,9 @@
+#include "grafo_t.hpp"
+
+int main (void) {
+
+  char fichero[10] = "text.gr";
+  grafo_t A(fichero);
+
+  return 0;
+}
