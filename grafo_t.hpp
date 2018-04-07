@@ -1,5 +1,10 @@
 #pragma once
+;
+#include <vector>
+#include <iostream>
+#include <fstream>
 
+using namespace std;
 
 class grafo_t {
 
@@ -9,12 +14,12 @@ class grafo_t {
   
   typedef struct {
 
-    unsigned j; //nodo 
+    unsigned int j; //nodo 
     int c; //atributo (peso, coste, etc.)
 
-  }ELEMENTO_LISTA_T
+    }elementoLista_T;
 
-  typedef <vector <vector <ELEMENTO_LISTA_T> > > LA_nodo;
+  typedef vector<vector<elementoLista_T> > LA_nodo;
 
   //Atributos de la clase
 
@@ -29,22 +34,17 @@ class grafo_t {
   public:
 
   //constructores
-  grafo_t(void): 
-    n_(0), 
-    m_(0), 
-    dirigido_(0) 
-  {}
-
-  grafo_t(char nombrefichero[], int &errorapertura);
+  grafo_t(char nombrefichero[]);
 
   //destructores
-
   ~grafo_t(void) {}
 
 
   //getters
+  const unsigned int get_nodes(void) const {return n_};
+  const unsigned int get_arcs(void) const {return m_};
 
 
-  //lectura fichero
+  void write (void);
 
 };

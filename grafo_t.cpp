@@ -1,34 +1,42 @@
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 #include "grafo_t.hpp"
 
+using namespace std;
+
 //constructor
-grafo_t::grafo_t(char nombrefichero[], int &errorapertura) {
+grafo_t::grafo_t(char nombrefichero[]) {
 
   ifstream inFile(nombrefichero);
+  elementoLista_T aux;
   int node, dest;
-  unsigned int size = 0;
-  vector auxnode, auxdest;
 
-  inFile >> n_;
-  inFile >> m_;
-  inFile >> dirigido_;
+  if (!inFile) cerr << "Error de apertura";
+
+  else {
   
-  LS_.resize(n_);
-  LP_.resize(n_);
+    inFile >> n_;
+    inFile >> m_;
+    inFile >> dirigido_;
 
-  while ( !inFile.eof() ) {
-    cin >> node;
-    cin >> dest;
+    cout << dirigido_;
 
-    ++size;
+    LS_.resize(n_);
+    LP_.resize(n_);
 
-    auxnode.resize(size, node);
-    auxdest.resize(size, dest);
-  }
+    while ( !inFile.eof() ) {
 
-  for ( unsigned int index = 1; index <= auxnode.size() ; ++i ) {
+      inFile >> node;
+      inFile >> dest;
+
+      aux.j = node;
+      aux.c = 0;
+
+      LS_[node - 1].push_back(aux);
+
+    }
   }
 }
 
