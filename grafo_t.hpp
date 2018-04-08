@@ -41,8 +41,8 @@ class grafo_t {
 
 
   //getters
-  const unsigned int get_nodes(void) const {return n_};
-  const unsigned int get_arcs(void) const {return m_};
+  const unsigned int get_nodes(void) const {return n_;};
+  const unsigned int get_arcs(void) const {return m_;};
 
 
   void write (void);

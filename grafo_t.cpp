@@ -1,4 +1,6 @@
 #include <vector>
+
+
 #include <fstream>
 #include <iostream>
 
@@ -21,17 +23,16 @@ grafo_t::grafo_t(char nombrefichero[]) {
     inFile >> m_;
     inFile >> dirigido_;
 
-    cout << dirigido_;
-
     LS_.resize(n_);
     LP_.resize(n_);
 
     while ( !inFile.eof() ) {
 
+      //ERROR. El constructor repite el ultimo nodo.
       inFile >> node;
       inFile >> dest;
 
-      aux.j = node;
+      aux.j = dest;
       aux.c = 0;
 
       LS_[node - 1].push_back(aux);
@@ -40,3 +41,13 @@ grafo_t::grafo_t(char nombrefichero[]) {
   }
 }
 
+
+void grafo_t::write(void) {
+
+  cout << endl;
+  for ( unsigned int row = 0; row < get_nodes(); ++row ) {
+    for ( unsigned int col = 0; col < LS_[row].size(); ++col ) {
+      cout << row + 1 << " " << LS_[row][col].j << endl;
+    }
+  }
+}
