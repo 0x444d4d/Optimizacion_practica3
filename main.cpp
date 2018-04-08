@@ -7,6 +7,7 @@ int main (void) {
 
 
   A.write();
+  A.info_grafo();
 
   return 0;
 }
