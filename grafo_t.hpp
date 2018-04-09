@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 class grafo_t {
 
  private:
@@ -36,7 +37,7 @@ class grafo_t {
   grafo_t(char nombrefichero[], bool &errorapertura);
 
   //destructores
-  ~grafo_t(void) {}
+  ~grafo_t(void);
 
 
   //getters
@@ -51,8 +52,10 @@ class grafo_t {
   
  private: 
 
+  bool openFile(char nombrefichero[], ifstream &inFile);
   void build(ifstream &inFile);
-  void update(char nombrefichero[], bool &errorApertura); 
+  void predecesorList(void);
+  void update(char nombrefichero[], bool &errorapertura); 
 
 };
 
