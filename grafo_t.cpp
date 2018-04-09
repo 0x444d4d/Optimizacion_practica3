@@ -42,8 +42,6 @@ void grafo_t::build(ifstream &inFile) {
 
       LS_[node - 1].push_back(aux);
     }
-  
-  return inFile;
 }
 
 void grafo_t::update(char nombrefichero[], bool &errorApertura) {
@@ -58,7 +56,7 @@ void grafo_t::update(char nombrefichero[], bool &errorApertura) {
   if (!inFile) { 
     cerr << "Error de apertura";
     errorapertura = true;
-  } else { build(inFile) }
+  } else { build(inFile); }
 }
 
 

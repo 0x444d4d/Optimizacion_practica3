@@ -51,8 +51,8 @@ class grafo_t {
   
  private: 
 
-  bool build(ifstream &inFile)
-  void update( char nombrefichero[], bool &errorApertura); 
+  void build(ifstream &inFile);
+  void update(char nombrefichero[], bool &errorApertura); 
 
 };
 
