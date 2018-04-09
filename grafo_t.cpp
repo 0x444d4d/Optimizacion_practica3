@@ -1,4 +1,3 @@
-
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -9,21 +8,27 @@
 using namespace std;
 
 //constructor
-grafo_t::grafo_t(char nombrefichero[]) {
+grafo_t::grafo_t(char nombrefichero[], bool &errorapertura) {
 
   ifstream inFile(nombrefichero);
+
+  if (!inFile) {
+    cerr << "Error de apertura";
+    errorapertura = true;
+  } else { build(inFile); } 
+}
+
+void grafo_t::build(ifstream &inFile) {
+
   elementoLista_T aux;
   int node, dest;
 
-  if (!inFile) cerr << "Error de apertura";
-  else {
-  
-    inFile >> n_;
-    inFile >> m_;
-    inFile >> dirigido_;
+  inFile >> n_;
+  inFile >> m_;
+  inFile >> dirigido_;
 
-    LS_.resize(n_);
-    LP_.resize(n_);
+  LS_.resize(n_);
+  LP_.resize(n_);
 
     while ( !inFile.eof() ) {
 
@@ -37,8 +42,23 @@ grafo_t::grafo_t(char nombrefichero[]) {
 
       LS_[node - 1].push_back(aux);
     }
+  
+  return inFile;
+}
+
+void grafo_t::update(char nombrefichero[], bool &errorApertura) {
+
+  for (unsigned col = 0; col < get_nodes(); ++col) {
+    LS_[col].clear();
   }
 
+  LS_.clear();
+
+  ifstream inFile(nombrefichero); 
+  if (!inFile) { 
+    cerr << "Error de apertura";
+    errorapertura = true;
+  } else { build(inFile) }
 }
 
 

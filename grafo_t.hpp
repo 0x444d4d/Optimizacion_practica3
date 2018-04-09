@@ -33,7 +33,7 @@ class grafo_t {
  public:
 
   //constructores
-  grafo_t(char nombrefichero[]);
+  grafo_t(char nombrefichero[], bool &errorapertura);
 
   //destructores
   ~grafo_t(void) {}
@@ -47,4 +47,14 @@ class grafo_t {
 
   void write (void);
   void info_grafo(void);
+
+  
+ private: 
+
+  bool build(ifstream &inFile)
+  void update( char nombrefichero[], bool &errorApertura); 
+
 };
+
+
+
