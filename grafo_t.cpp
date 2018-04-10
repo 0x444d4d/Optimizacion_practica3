@@ -46,8 +46,6 @@ void grafo_t::build(ifstream &inFile) {
 
   while ( !inFile.eof() ) {
 
-    //ERROR. El constructor repite el ultimo nodo.
-    //Es posible que sea un error de grafo::write().
     inFile >> node >> dest;
 
     aux.j = (dest - 1);
