@@ -51,6 +51,7 @@ class grafo_t {
   void write (LA_nodo lista);
   void info_grafo(void);
   void mostrar_listas(void);
+  void update(char nombrefichero[], bool &errorapertura); 
 
   
  private: 
@@ -58,7 +59,6 @@ class grafo_t {
   bool open_file(char nombrefichero[], ifstream &inFile);
   void build(ifstream &inFile);
   void predecesor_list(void);
-  void update(char nombrefichero[], bool &errorapertura); 
 
 };
 
