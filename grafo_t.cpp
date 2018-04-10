@@ -14,8 +14,8 @@ grafo_t::grafo_t(char nombrefichero[], bool &errorapertura) {
   */
 
   ifstream inFile;
-  if ( errorapertura = !open_file(nombrefichero, inFile)) 
-    build(inFile);
+  errorapertura = open_file(nombrefichero, inFile);
+  if (!errorapertura) build(inFile);
 }
 
 
@@ -44,18 +44,21 @@ void grafo_t::build(ifstream &inFile) {
   LS_.resize(n_);
   LP_.resize(n_);
 
-    while ( !inFile.eof() ) {
+  while ( !inFile.eof() ) {
 
-      //ERROR. El constructor repite el ultimo nodo.
-      //Es posible que sea un error de grafo::write().
-      inFile >> node >> dest;
+    //ERROR. El constructor repite el ultimo nodo.
+    //Es posible que sea un error de grafo::write().
+    inFile >> node >> dest;
 
-      aux.j = (dest - 1);
-      aux.c = 0;
+    aux.j = (dest - 1);
+    aux.c = 0;
 
-      LS_[node - 1].push_back(aux);
-    }
-  predecesor_list();
+    LS_[node - 1].push_back(aux);
+  }
+  
+  LS_[node - 1].pop_back();
+
+  predecessor_list();
 }
 
 
@@ -77,8 +80,8 @@ void grafo_t::update(char nombrefichero[], bool &errorapertura) {
 */
 
   ifstream inFile;
-  if ( errorapertura = !open_file(nombrefichero, inFile)) 
-    build(inFile);
+  errorapertura = open_file(nombrefichero, inFile);
+  if (!errorapertura) build(inFile);
 }
 
 
@@ -107,16 +110,36 @@ void grafo_t::info_grafo(void) {
 
 }
 
-
-
 void grafo_t::mostrar_listas(void) {
   
   if (es_dirigido()) {
-    cout << "Lista sucesores:" << endl;
-    write(LS_); 
-    
-    cout << endl << "Lista de predecesores:" << endl;
-    write(LP_);
+
+      cout << "Lista sucesores:" << endl;
+      write(LS_); 
+      
+      cout << endl << "Lista de predecesores:" << endl;
+      write(LP_);
+
+    } else { 
+       cout << "Lista de adyacencia:" << endl;
+       write(LS_);
+    }
+}
+
+
+void grafo_t::mostrar_listas(bool mplex) {
+  
+  if (es_dirigido()) {
+
+    if (mplex) {
+      cout << "Lista de predecesores:" << endl;
+      write(LP_);
+
+    } else {
+      cout << "Lista sucesores:" << endl;
+      write(LS_); 
+    }
+
   } else { 
     cout << "Lista de adyacencia:" << endl;
     write(LS_);
@@ -134,7 +157,7 @@ bool grafo_t::open_file(char filename[], ifstream &inFile) {
 
 
 
-void grafo_t::predecesor_list(void) {
+void grafo_t::predecessor_list(void) {
 
   elementoLista_T aux;
 

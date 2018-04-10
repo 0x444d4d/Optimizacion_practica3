@@ -4,7 +4,7 @@
 #include "grafo_t.hpp"
 
 void menu(void);
-void print_menu(bool mode);
+short unsigned print_menu(bool mode);
 
 int main (void) {
 
@@ -27,43 +27,79 @@ void menu (void) {
   grafo_t A(fichero, errorfichero);
 
   do {
-    if (errorfichero) {
-      print_menu(A.es_dirigido());
-      cin >> select;
-      getchar();
-    
-      switch (select) {
-        case 1:
-         cout << "Escriba el nombre del fichero: ";
-         cin >>  fichero;
-         getchar();
-         A.update(fichero, errorfichero);
-         break;
+    if (!errorfichero) {
+      if (A.es_dirigido()) {
+        
+        switch (print_menu(A.es_dirigido())) {
 
-       case 2:
-         A.info_grafo();
-         getchar();
-         break;
+          case 1:
+            cout << "Escriba el nombre del fichero: ";
+            cin >>  fichero;
+            getchar();
+            A.update(fichero, errorfichero);
+            break;
 
-       case 3:
-         A.mostrar_listas();
-         getchar();
-         break;
+          case 2:
+            A.info_grafo();
+            getchar();
+            break;
 
-         case 4:
-         A.mostrar_listas();
-         getchar();
-         break;
+          case 3:
+            A.mostrar_listas(0);
+            getchar();
+           break;
 
-       case 5:
-         exit(0);
+          case 4:
+            A.mostrar_listas(1);
+            getchar();
+            break;
 
-     }
+          case 5:
+            system("clear");
+            exit(0);
+
+          default:
+            cout << "Opcion no valida";
+            getchar();
+        }
+      
+      } else {
+
+        switch (print_menu(A.es_dirigido())) {
+
+          case 1:
+            cout << "Escriba el nombre del fichero: ";
+            cin >>  fichero;
+            getchar();
+            A.update(fichero, errorfichero);
+            break;
+
+          case 2:
+            A.info_grafo();
+            getchar();
+            break;
+
+          case 3:
+            A.mostrar_listas();
+            getchar();
+            break;
+
+          case 4:
+            system("clear");
+            exit(0);
+
+          default:
+            cout << "Opcion no valida";
+            getchar();
+        }
+      
+      }
     }
   } while(1);
 }
 
-void print_menu(bool mode) {
+short unsigned print_menu(bool mode) {
+  short unsigned select;
 
   system("clear");
 
@@ -77,5 +113,13 @@ void print_menu(bool mode) {
     cout << "3.- Mostrar lista de adyacencia." << endl;
     cout << "4.- Salir del programa." << endl;
   }
+
+  cout << "Indique una opcion: ";
+  cin >> select;
+  getchar();
+
+  system("clear");
+
+  return select;
 
 }

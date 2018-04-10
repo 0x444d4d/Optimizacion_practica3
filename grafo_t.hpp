@@ -48,9 +48,9 @@ class grafo_t {
   const bool es_dirigido(void) const {return dirigido_;};
 
 
-  void write (LA_nodo lista);
   void info_grafo(void);
   void mostrar_listas(void);
+  void mostrar_listas(bool mplex);
   void update(char nombrefichero[], bool &errorapertura); 
 
   
@@ -58,7 +58,8 @@ class grafo_t {
 
   bool open_file(char nombrefichero[], ifstream &inFile);
   void build(ifstream &inFile);
-  void predecesor_list(void);
+  void predecessor_list(void);
+  void write (LA_nodo lista);
 
 };
 
