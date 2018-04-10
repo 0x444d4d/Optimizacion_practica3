@@ -3,10 +3,11 @@
 int main (void) {
 
   char fichero[10] = "text.gr";
-  grafo_t A(fichero);
+  bool errorfichero = false;
+  grafo_t A(fichero, errorfichero);
 
 
-  A.write();
+  A.mostrar_listas();
   A.info_grafo();
 
   return 0;

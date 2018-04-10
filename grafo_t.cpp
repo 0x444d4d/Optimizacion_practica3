@@ -1,8 +1,3 @@
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <iomanip>
-
 #include "grafo_t.hpp"
 
 using namespace std;
@@ -19,7 +14,7 @@ grafo_t::grafo_t(char nombrefichero[], bool &errorapertura) {
   */
 
   ifstream inFile;
-  if ( errorapertura = !openFile(nombrefichero, inFile)) 
+  if ( errorapertura = !open_file(nombrefichero, inFile)) 
     build(inFile);
 }
 
@@ -60,7 +55,7 @@ void grafo_t::build(ifstream &inFile) {
 
       LS_[node - 1].push_back(aux);
     }
-  predecesorList();
+  predecesor_list();
 }
 
 
@@ -82,30 +77,19 @@ void grafo_t::update(char nombrefichero[], bool &errorapertura) {
 */
 
   ifstream inFile;
-  if ( errorapertura = !openFile(nombrefichero, inFile)) 
+  if ( errorapertura = !open_file(nombrefichero, inFile)) 
     build(inFile);
 }
 
 
 
-void grafo_t::write(void) {
+void grafo_t::write(LA_nodo lista) {
 
-  cout << "Lista de sucesores:" << endl;
 
   for ( unsigned int row = 0; row < get_nodes(); ++row ) {
     cout << "nodo " << (row + 1) << ": ";
-    for ( unsigned int col = 0; col < LS_[row].size(); ++col ) {
-      cout << (LS_[row][col].j + 1) << " ";
-    }
-    cout << endl;
-  }
-
-  cout << "Lista de predecesores:" << endl;
-   
-  for ( unsigned int row = 0; row < get_nodes(); ++row ) {
-    cout << "nodo " << (row + 1) << ": ";
-    for ( unsigned int col = 0; col < LP_[row].size(); ++col ) {
-      cout << (LP_[row][col].j + 1) << " ";
+    for ( unsigned int col = 0; col < lista[row].size(); ++col ) {
+      cout << (lista[row][col].j + 1) << " ";
     }
     cout << endl;
   }
@@ -125,16 +109,32 @@ void grafo_t::info_grafo(void) {
 
 
 
-bool grafo_t::openFile(char filename[], ifstream &inFile) {
+void grafo_t::mostrar_listas(void) {
+  
+  if (es_dirigido()) {
+    cout << "Lista sucesores:" << endl;
+    write(LS_); 
+    
+    cout << endl << "Lista de predecesores:" << endl;
+    write(LP_);
+  } else { 
+    cout << "Lista de adyacencia:" << endl;
+    write(LS_);
+  }
+}
+
+
+
+bool grafo_t::open_file(char filename[], ifstream &inFile) {
 
   inFile.open(filename);
-  return ((inFile.is_open() == true) ? false : true);
+  return ((inFile.is_open()) ? false : true);
    
 }
 
 
 
-void grafo_t::predecesorList(void) {
+void grafo_t::predecesor_list(void) {
 
   elementoLista_T aux;
 

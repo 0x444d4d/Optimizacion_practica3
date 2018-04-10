@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <cstdlib>
 
 using namespace std;
 
@@ -46,15 +48,16 @@ class grafo_t {
   const bool es_dirigido(void) const {return dirigido_;};
 
 
-  void write (void);
+  void write (LA_nodo lista);
   void info_grafo(void);
+  void mostrar_listas(void);
 
   
  private: 
 
-  bool openFile(char nombrefichero[], ifstream &inFile);
+  bool open_file(char nombrefichero[], ifstream &inFile);
   void build(ifstream &inFile);
-  void predecesorList(void);
+  void predecesor_list(void);
   void update(char nombrefichero[], bool &errorapertura); 
 
 };
