@@ -23,7 +23,8 @@ void menu (void) {
   system("clear");
   cout << "Escriba el nombre del fichero: ";
   cin >> fichero;
-
+  getchar();
+  
   grafo_t A(fichero, errorfichero);
 
   do {
