@@ -44,17 +44,13 @@ void grafo_t::build(ifstream &inFile) {
   LS_.resize(n_);
   LP_.resize(n_);
 
-  while ( !inFile.eof() ) {
-
-    inFile >> node >> dest;
+  while ( inFile >> node >> dest ) {
 
     aux.j = (dest - 1);
     aux.c = 0;
 
     LS_[node - 1].push_back(aux);
   }
-  
-  LS_[node - 1].pop_back();
 
   predecessor_list();
 }
