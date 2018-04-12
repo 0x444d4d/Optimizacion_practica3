@@ -5,14 +5,6 @@ using namespace std;
 //constructor
 grafo_t::grafo_t(char nombrefichero[], bool &errorapertura) {
 
-  /*
-  ifstream inFile(nombrefichero);
-
-  if (!inFile) {
-    errorapertura = true;
-  } else { build(inFile); } 
-  */
-
   ifstream inFile;
   errorapertura = open_file(nombrefichero, inFile);
   if (!errorapertura) build(inFile);
@@ -65,14 +57,6 @@ void grafo_t::update(char nombrefichero[], bool &errorapertura) {
 
   LS_.clear();
 
-/*
-  ifstream inFile(nombrefichero); 
-
-  if (!inFile) { 
-    errorapertura = true;
-  } else { build(inFile); }
-*/
-
   ifstream inFile;
   errorapertura = open_file(nombrefichero, inFile);
   if (!errorapertura) build(inFile);
@@ -82,15 +66,31 @@ void grafo_t::update(char nombrefichero[], bool &errorapertura) {
 
 void grafo_t::write(LA_nodo lista) {
 
+  for ( unsigned int row = 0; row < get_nodes(); ++row ) {
+    cout << "nodo " << (row + 1) << ": ";
+    for ( unsigned int col = 0; col < lista[row].size(); ++col ) {
+      cout << (lista[row][col].j + 1) << " ";
+    }
+    cout << endl;
+  }
+}
+
+
+
+void grafo_t::write(LA_nodo lista, LA_nodo lista2) {
 
   for ( unsigned int row = 0; row < get_nodes(); ++row ) {
-    if ( lista[row].size() ) {
-      cout << "nodo " << (row + 1) << ": ";
+    cout << "nodo " << (row + 1) << ": ";
+    if (lista[row].size()) {
       for ( unsigned int col = 0; col < lista[row].size(); ++col ) {
         cout << (lista[row][col].j + 1) << " ";
       }
-      cout << endl;
+    } else {
+      for ( unsigned int col = 0; col < lista2[row].size(); ++col ) {
+        cout << (lista2[row][col].j + 1) << " ";
+      }
     }
+    cout << endl;
   }
 }
 
@@ -118,7 +118,7 @@ void grafo_t::mostrar_listas(void) {
 
     } else { 
        cout << "Lista de adyacencia:" << endl;
-       write(LS_);
+       write(LS_, LP_);
     }
 }
 

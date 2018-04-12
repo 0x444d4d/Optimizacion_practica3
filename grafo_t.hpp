@@ -60,6 +60,7 @@ class grafo_t {
   void build(ifstream &inFile);
   void predecessor_list(void);
   void write (LA_nodo lista);
+  void write (LA_nodo lista, LA_nodo lista2);
 
 };
 
