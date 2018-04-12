@@ -84,11 +84,13 @@ void grafo_t::write(LA_nodo lista) {
 
 
   for ( unsigned int row = 0; row < get_nodes(); ++row ) {
-    cout << "nodo " << (row + 1) << ": ";
-    for ( unsigned int col = 0; col < lista[row].size(); ++col ) {
-      cout << (lista[row][col].j + 1) << " ";
+    if ( lista[row].size() ) {
+      cout << "nodo " << (row + 1) << ": ";
+      for ( unsigned int col = 0; col < lista[row].size(); ++col ) {
+        cout << (lista[row][col].j + 1) << " ";
+      }
+      cout << endl;
     }
-    cout << endl;
   }
 }
 

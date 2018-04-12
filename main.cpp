@@ -21,6 +21,7 @@ void menu (void) {
   bool errorfichero;
 
   system("clear");
+  system("./a.out");
   cout << "Escriba el nombre del fichero: ";
   cin >> fichero;
   getchar();
@@ -34,6 +35,7 @@ void menu (void) {
         switch (print_menu(A.es_dirigido())) {
 
           case 1:
+            system("./a.out");
             cout << "Escriba el nombre del fichero: ";
             cin >>  fichero;
             getchar();
@@ -69,6 +71,7 @@ void menu (void) {
         switch (print_menu(A.es_dirigido())) {
 
           case 1:
+            system("./a.out");
             cout << "Escriba el nombre del fichero: ";
             cin >>  fichero;
             getchar();
