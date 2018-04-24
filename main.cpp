@@ -87,8 +87,13 @@ void menu (void) {
             A.mostrar_listas();
             getchar();
             break;
-
+	
           case 4:
+            A.componentes_conexas();
+            cin.get();
+            break;
+
+          case 5:
             system("clear");
             exit(0);
 
@@ -115,7 +120,8 @@ short unsigned print_menu(bool mode) {
     cout << "5.- Salir del programa." << endl;
   } else {
     cout << "3.- Mostrar lista de adyacencia." << endl;
-    cout << "4.- Salir del programa." << endl;
+    cout << "4.- Mostrar componentes conexas." << endl;
+    cout << "5.- Salir del programa." << endl;
   }
 
   cout << "Indique una opcion: ";

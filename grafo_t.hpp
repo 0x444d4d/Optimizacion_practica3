@@ -52,7 +52,7 @@ class grafo_t {
   void mostrar_listas(void);
   void mostrar_listas(bool mplex);
   void update(char nombrefichero[], bool &errorapertura); 
-  void dfs(unsigned i, vector<bool> &visitado);
+  void componentes_conexas(void);
 
   
  private: 
@@ -62,5 +62,6 @@ class grafo_t {
   void predecessor_list(void);
   void write (LA_nodo lista);
   void write (LA_nodo lista, LA_nodo lista2);
+  void dfs(unsigned i, vector<bool> &visitado);
 
 };

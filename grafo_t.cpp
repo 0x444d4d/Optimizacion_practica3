@@ -55,7 +55,12 @@ void grafo_t::update(char nombrefichero[], bool &errorapertura) {
     LS_[col].clear();
   }
 
+  for (unsigned col = 0; col < get_nodes(); ++col) {
+    LP_[col].clear();
+  }
+
   LS_.clear();
+  LP_.clear();
 
   ifstream inFile;
   errorapertura = open_file(nombrefichero, inFile);
@@ -181,13 +186,13 @@ void grafo_t::dfs(unsigned int i, vector<bool> &visitado) {
 void grafo_t::componentes_conexas(void) {
   vector<bool> visitado(n_);
   unsigned int inx;
-  unsigned int conmp = 0;
+  unsigned int comp = 0;
  
   for (inx = 0; inx < n_; ++inx)
     visitado[inx] = false;
  
   inx = 0;
-  cout << "Componente conexa" << inx+1 << "{";
+  cout << "Componente conexa: " << inx+1 << " {";
   dfs(inx, visitado);
   cout << "}" << endl;
     
