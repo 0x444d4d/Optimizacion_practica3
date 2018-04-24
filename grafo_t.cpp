@@ -3,7 +3,7 @@
 using namespace std;
 
 //constructor
-grafo_t::grafo_t(char nombrefichero[], bool &errorapertura) {
+  grafo_t::grafo_t(char nombrefichero[], bool &errorapertura) {
 
   ifstream inFile;
   errorapertura = open_file(nombrefichero, inFile);
@@ -147,7 +147,7 @@ void grafo_t::mostrar_listas(bool mplex) {
 bool grafo_t::open_file(char filename[], ifstream &inFile) {
 
   inFile.open(filename);
-  return ((inFile.is_open()) ? false : true);
+  return !inFile.is_open();
    
 }
 
@@ -166,4 +166,14 @@ void grafo_t::predecessor_list(void) {
       LP_[LS_[row][col].j].push_back(aux);
     
     }
+}
+
+void grafo_t::dfs(unsigned i, vector<bool> &visitado) {
+
+  visitado[i] = true;
+  cout << i+1 << ", ";
+  for (unsigned int j=0; j < LS_[i].size(); ++j)
+    if (!visitado[LS_[i][j].j])
+      dfs(LS_[i][j].j, visitado);
+
 }

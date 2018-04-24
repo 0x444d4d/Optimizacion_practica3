@@ -52,6 +52,7 @@ class grafo_t {
   void mostrar_listas(void);
   void mostrar_listas(bool mplex);
   void update(char nombrefichero[], bool &errorapertura); 
+  void dfs(unsigned i, vector<bool> &visitado);
 
   
  private: 
@@ -63,6 +64,3 @@ class grafo_t {
   void write (LA_nodo lista, LA_nodo lista2);
 
 };
-
-
-
