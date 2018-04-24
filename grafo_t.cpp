@@ -168,7 +168,7 @@ void grafo_t::predecessor_list(void) {
     }
 }
 
-void grafo_t::dfs(unsigned i, vector<bool> &visitado) {
+void grafo_t::dfs(unsigned int i, vector<bool> &visitado) {
 
   visitado[i] = true;
   cout << i+1 << ", ";
@@ -176,4 +176,32 @@ void grafo_t::dfs(unsigned i, vector<bool> &visitado) {
     if (!visitado[LS_[i][j].j])
       dfs(LS_[i][j].j, visitado);
 
+}
+
+void grafo_t::componentes_conexas(void) {
+  vector<bool> visitado(n_);
+  unsigned int inx;
+  unsigned int conmp = 0;
+ 
+  for (inx = 0; inx < n_; ++inx)
+    visitado[inx] = false;
+ 
+  inx = 0;
+  cout << "Componente conexa" << inx+1 << "{";
+  dfs(inx, visitado);
+  cout << "}" << endl;
+    
+  for (inx = 1; inx < n_; ++inx) {
+    if (!visitado[inx]) {
+      cout << "Componente conexa" << inx+1 << "{";
+      dfs(inx, visitado);
+      cout << "}" << endl;
+      ++comp;
+    }
+  }
+  
+  if (!comp) 
+    cout << "El grafo es conexo" << endl;
+  else 
+    cout << "El grafo no es conexo" << endl;
 }
