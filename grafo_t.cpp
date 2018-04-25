@@ -36,13 +36,13 @@ void grafo_t::build(ifstream &inFile) {
   LS_.resize(n_);
   LP_.resize(n_);
 
-  while ( inFile >> node >> dest ) {
+  while ( inFile >> node >> dest )
+    if (dest) {
+      aux.j = (dest - 1);
+      aux.c = 0;
 
-    aux.j = (dest - 1);
-    aux.c = 0;
-
-    LS_[node - 1].push_back(aux);
-  }
+      LS_[node - 1].push_back(aux);    
+    }
 
   predecessor_list();
 }
