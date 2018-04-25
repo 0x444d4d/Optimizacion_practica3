@@ -5,6 +5,7 @@
 
 void menu(void);
 short unsigned print_menu(bool mode);
+void show_files(void);
 
 int main (void) {
 
@@ -21,7 +22,8 @@ void menu (void) {
   bool errorfichero;
 
   system("clear");
-  system("./a.out");
+  show_files();
+  //system("./a.out");
   cout << "Escriba el nombre del fichero: ";
   cin >> fichero;
   getchar();
@@ -35,7 +37,8 @@ void menu (void) {
         switch (print_menu(A.es_dirigido())) {
 
           case 1:
-            system("./a.out");
+            //system("./a.out");
+	    show_files();
             cout << "Escriba el nombre del fichero: ";
             cin >>  fichero;
             getchar();
@@ -71,8 +74,9 @@ void menu (void) {
         switch (print_menu(A.es_dirigido())) {
 
           case 1:
-            system("./a.out");
-            cout << "Escriba el nombre del fichero: ";
+            //system("./a.out");
+            show_files();
+	    cout << "Escriba el nombre del fichero: ";
             cin >>  fichero;
             getchar();
             A.update(fichero, errorfichero);
@@ -132,4 +136,27 @@ short unsigned print_menu(bool mode) {
 
   return select;
 
+}
+
+void show_files(void) {
+  int inx = 0;
+  ifstream inFile;
+  vector<string> fileVector;
+
+  //system("ls *.gr");
+  system("ls > filelist.txt");
+  inFile.open("filelist.txt");
+
+  string aux;
+  while (inFile >> aux)
+    if (aux.substr(aux.find_last_of(".")) == ".gr")
+      fileVector.push_back(aux);
+
+  while (inx < fileVector.size()) {
+    for (int len = 0; len < 4 && len < fileVector.size(); ++len) {
+      cout << fileVector[inx] << " ";
+      ++inx;
+    }
+	  
+  cout << endl;
 }
