@@ -4,12 +4,15 @@
 
 #include "grafo_t.hpp"
 
-using namespace std;
+const unsigned KEY_DOWN = 258
+const unsigned KEY_UP = 259
+const unsigned KEY_LEFT = 260
+const unsigned KEY_RIGHT = 261
 
 int menu(bool mplex);
 void show_files(void);
 
-
+using namespace std;
 
 int main(void)
 {	
@@ -122,19 +125,19 @@ int menu(bool mplex)
 
     switch(getch()) 
     {
-      case 258: 
+			case KEY_DOWN:
         if (selector < (mplex ? 5:4)) ++selector;
         break;
     
-      case 259: 
+      case KEY_UP: 
         if (selector) --selector;
         break;
 
-      case 260: 
+      case KEY_LEFT: 
         //Not used
         break;
 
-      case 261: 
+      case KEY_RIGHT: 
         endwin();
         return selector;
         break;
@@ -146,3 +149,4 @@ int menu(bool mplex)
 void show_files(void) {
   system("ls *.gr");
 }
+	
