@@ -125,7 +125,7 @@ int menu(bool mplex)
 
     switch(getch()) 
     {
-			case KEY_DOWN:
+      case KEY_DOWN:
         if (selector < (mplex ? 5:4)) ++selector;
         break;
     

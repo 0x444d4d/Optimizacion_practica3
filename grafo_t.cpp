@@ -214,10 +214,39 @@ void grafo_t::componentes_conexas(void) {
 
 void grafo_t::dikstra() {
 
-  vector<bool> PermamentementeEtiquetado;
+  vector<bool> permamentementeetiquetado;
   vector<int> d;
   vector<unsigned int> pred;
   int min;
   unsigned int s, candidato;
   
-  for 
+  permanentementeetiquetado.resize(n_,false);
+  d.resize(n_, maxint);
+  pred.resize(n_,UERROR);
+
+  cout << endl;
+  cout << "Caminos minimos: Dijkstra" << endl;
+  cout << "Nodo de partida? [1-" << n_ << "]: ";
+  cin >> (unsigned int $) s;
+
+  d[==s]=0; pred[s]=s;
+  do {
+
+  } while(min < maxint);
+  
+  cout << "Soluciones:" << endl;
+
+} 
+
+
+void grafo_t::bellman_end_moore() {
+
+  vector<int> d;
+  vector<unsigned> pred;
+  unsigned s, numeromejoras = 0;
+  bool mejora;
+
+  d.resize(n_, maxint);
+  pred.resize(n_, UERROR);
+
+}
