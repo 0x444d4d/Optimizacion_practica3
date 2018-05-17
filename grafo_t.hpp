@@ -51,8 +51,11 @@ class grafo_t {
   void info_grafo(void);
   void mostrar_listas(void);
   void mostrar_listas(bool mplex);
+  void mostrar_camino(unsigned int s, unsigned int i, vector<unsigned int> pred);
   void update(char nombrefichero[], bool &errorapertura); 
   void componentes_conexas(void);
+  void dijkstra(void);
+  void bellman_end_moore(void);
 
   
  private: 
@@ -63,7 +66,5 @@ class grafo_t {
   void write (LA_nodo lista);
   void write (LA_nodo lista, LA_nodo lista2);
   void dfs(unsigned i, vector<bool> &visitado);
-  //void dijkstra();
-  //void bellman_end_moore();
 
 };

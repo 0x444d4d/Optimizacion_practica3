@@ -1,4 +1,5 @@
 #include "grafo_t.hpp"
+#define maxint 999999
 
 using namespace std;
 
@@ -29,17 +30,16 @@ grafo_t::~grafo_t(void) {
 void grafo_t::build(ifstream &inFile) {
 
   elementoLista_T aux;
-  int node, dest;
+  int node, dest, cost;
 
   inFile >> n_ >> m_ >> dirigido_;
 
   LS_.resize(n_);
   LP_.resize(n_);
 
-  while ( inFile >> node >> dest )
-    if (dest) {
+  while ( inFile >> node >> dest >> cost ) {
       aux.j = (dest - 1);
-      aux.c = 0;
+      aux.c = cost;
 
       LS_[node - 1].push_back(aux);    
     }
@@ -212,30 +212,56 @@ void grafo_t::componentes_conexas(void) {
 }
 
 
-void grafo_t::dikstra() {
+void grafo_t::dijkstra() {
 
-  vector<bool> permamentementeetiquetado;
+  vector<bool> peretiquetado;
   vector<int> d;
   vector<unsigned int> pred;
   int min;
   unsigned int s, candidato;
   
-  permanentementeetiquetado.resize(n_,false);
+  peretiquetado.resize(n_,false);
   d.resize(n_, maxint);
-  pred.resize(n_,UERROR);
+  pred.resize(n_, -1);
 
   cout << endl;
   cout << "Caminos minimos: Dijkstra" << endl;
   cout << "Nodo de partida? [1-" << n_ << "]: ";
-  cin >> (unsigned int $) s;
+  cin >> (unsigned int &) s;
+  cin.get();
 
-  d[==s]=0; pred[s]=s;
+  d[--s]=0; pred[s]=s;
   do {
+    min = maxint;
 
-  } while(min < maxint);
-  
+    for(int i=0;i<n_;i++){
+
+      if((d[i]<min)&&(!peretiquetado[i])&&(d[i]<maxint)){
+        candidato=i;
+        min=d[i];
+
+      }
+    }
+    if (!peretiquetado[candidato]){
+      peretiquetado[candidato]=true;
+
+
+      for(int i=0; i<LS_[candidato].size();i++){
+        if(((d[LS_[candidato][i].j-1]>(d[candidato]+LS_[candidato][i].c))&&(LS_[candidato][i].j-1!=candidato))&&(!peretiquetado[LS_[candidato][i].j-1])){
+          d[LS_[candidato][i].j-1]=d[candidato]+LS_[candidato][i].c;
+          pred[LS_[candidato][i].j-1]=candidato;
+        }
+      }
+    }
+
+  }while (min < maxint);
+
   cout << "Soluciones:" << endl;
-
+  for (int i = n_-1; i >= 0; --i) {
+    mostrar_camino(s , i, pred);
+    cout << i+1 << endl;
+    cout << "Coste =" << d[i] << endl;
+  }
 } 
 
 
@@ -247,6 +273,50 @@ void grafo_t::bellman_end_moore() {
   bool mejora;
 
   d.resize(n_, maxint);
-  pred.resize(n_, UERROR);
+  pred.resize(n_, -1);
+ 
+  cout << endl;
+  cout << "Caminos minimos: Bellman - End - Moore" << endl;
+  cout << "Nodo de partida? [1-" << n_ << "]: ";
+  cin >> (unsigned int &) s;
+  cin.get();
 
+  d[--s]=0; pred[s]=s;
+
+  do {
+    mejora=false;
+    for(int i=0;i<n_;i++){
+      for(int j=0;j<LS_[i].size();j++){
+        if(i!=LS_[i][j].j-1){
+          if (d[LS_[i][j].j-1]>(d[i]+LS_[i][j].c)){
+            mejora=true;
+            d[LS_[i][j].j-1]=d[i]+LS_[i][j].c;
+            pred[LS_[i][j].j-1]=i;
+          }
+        }
+      }
+    }numeromejoras++;
+
+  } while (((numeromejoras) < n_) && mejora);
+
+  if (mejora) cout<<"hay un ciclo negativo \n";
+
+  for(int i=pred.size()-1; i>=0;i--){
+
+    cout<<"recorrido hasta el nodo "<<i+1<<" : \n";
+    mostrar_camino(s , i, pred);
+    cout<<i+1<<endl;
+    cout<<"distancia/coste ="<<d[i]<<endl;
+  }
 }
+
+
+void grafo_t::mostrar_camino(unsigned s, unsigned i, vector<unsigned> pred) {
+  if (i != s) {
+    if (pred[i]!=-1){
+      mostrar_camino(s,pred[i],pred);
+      cout << pred[i]+1 << " -> ";
+    }
+  }
+}
+
