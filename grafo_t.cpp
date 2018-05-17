@@ -247,9 +247,9 @@ void grafo_t::dijkstra() {
 
 
       for(int i=0; i<LS_[candidato].size();i++){
-        if(((d[LS_[candidato][i].j-1]>(d[candidato]+LS_[candidato][i].c))&&(LS_[candidato][i].j-1!=candidato))&&(!peretiquetado[LS_[candidato][i].j-1])){
-          d[LS_[candidato][i].j-1]=d[candidato]+LS_[candidato][i].c;
-          pred[LS_[candidato][i].j-1]=candidato;
+        if(((d[LS_[candidato][i].j]>(d[candidato]+LS_[candidato][i].c))&&(LS_[candidato][i].j!=candidato))&&(!peretiquetado[LS_[candidato][i].j])){
+          d[LS_[candidato][i].j]=d[candidato]+LS_[candidato][i].c;
+          pred[LS_[candidato][i].j]=candidato;
         }
       }
     }
@@ -259,8 +259,8 @@ void grafo_t::dijkstra() {
   cout << "Soluciones:" << endl;
   for (int i = n_-1; i >= 0; --i) {
     mostrar_camino(s , i, pred);
-    cout << i+1 << endl;
-    cout << "Coste =" << d[i] << endl;
+    cout << i+1;
+    cout << " :: Coste =" << d[i] << endl;
   }
 } 
 
@@ -287,11 +287,11 @@ void grafo_t::bellman_end_moore() {
     mejora=false;
     for(int i=0;i<n_;i++){
       for(int j=0;j<LS_[i].size();j++){
-        if(i!=LS_[i][j].j-1){
-          if (d[LS_[i][j].j-1]>(d[i]+LS_[i][j].c)){
+        if(i!=LS_[i][j].j){
+          if (d[LS_[i][j].j]>(d[i]+LS_[i][j].c)){
             mejora=true;
-            d[LS_[i][j].j-1]=d[i]+LS_[i][j].c;
-            pred[LS_[i][j].j-1]=i;
+            d[LS_[i][j].j]=d[i]+LS_[i][j].c;
+            pred[LS_[i][j].j]=i;
           }
         }
       }
@@ -299,14 +299,13 @@ void grafo_t::bellman_end_moore() {
 
   } while (((numeromejoras) < n_) && mejora);
 
-  if (mejora) cout<<"hay un ciclo negativo \n";
+  if (mejora) cout << "Hay ciclo negaivo" << endl;
 
-  for(int i=pred.size()-1; i>=0;i--){
-
-    cout<<"recorrido hasta el nodo "<<i+1<<" : \n";
+  cout << "Soluciones:" << endl;
+  for(int i = pred.size()-1; i >= 0; --i){
     mostrar_camino(s , i, pred);
-    cout<<i+1<<endl;
-    cout<<"distancia/coste ="<<d[i]<<endl;
+    cout << i+1;
+    cout << " :: coste =" << d[i] << endl;
   }
 }
 
