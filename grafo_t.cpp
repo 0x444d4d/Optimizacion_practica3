@@ -210,3 +210,14 @@ void grafo_t::componentes_conexas(void) {
   else 
     cout << "El grafo no es conexo" << endl;
 }
+
+
+void grafo_t::dikstra() {
+
+  vector<bool> PermamentementeEtiquetado;
+  vector<int> d;
+  vector<unsigned int> pred;
+  int min;
+  unsigned int s, candidato;
+  
+  for 
