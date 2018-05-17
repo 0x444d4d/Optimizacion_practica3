@@ -63,5 +63,7 @@ class grafo_t {
   void write (LA_nodo lista);
   void write (LA_nodo lista, LA_nodo lista2);
   void dfs(unsigned i, vector<bool> &visitado);
+  void dijkstra();
+  void bellman_end_moore();
 
 };
